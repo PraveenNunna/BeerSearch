@@ -24,7 +24,7 @@ export class BeerService extends BaseService {
     let me = this,
       beers: Beer[] = [];
 
-    return me.http.get(`${this.requestBaseUrl}beers?order=name&sort=ASC&hasLabels=Y&withBreweries=Y&key=${me.apiKey}`).
+    return me.http.get(`${this.requestBaseUrl}beers?order=name&sort=DESC&hasLabels=Y&withBreweries=Y&key=${me.apiKey}`).
       map((response: Response) => {
         let data = response.json();
         beers = me.deserializeBeers(data);

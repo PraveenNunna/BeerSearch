@@ -25,7 +25,8 @@
         "../node_modules/@swimlane/ngx-datatable/src/themes/material.scss",
         "../node_modules/@swimlane/ngx-datatable/assets/app.css",
         "../node_modules/@swimlane/ngx-datatable/assets/icons.css",
-        "styles.css"
+        "styles.css",
+        "container.css"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.min.js",
