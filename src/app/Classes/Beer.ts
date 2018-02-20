@@ -12,7 +12,7 @@ export class Beer {
 
   public imageUrl : string;
 
-  public breweries : string[];
+  public brewery : string;
 
   constructor() {
 

@@ -39,7 +39,7 @@ export class BeerService extends BaseService {
     let me = this,
       beers: Beer[] = [];
 
-    return me.http.get(this.requestBaseUrl + 'search?q=' + searchString + '&key=af92fb7b6a111f9e932034edbe4faa07').
+    return me.http.get(this.requestBaseUrl + 'search?q=' + searchString + '&key=ee8a1a84bc76fd7d7ae6dd0dc45583e3').
       map((response: Response) => {
 
         let data = response.json();
@@ -54,7 +54,7 @@ export class BeerService extends BaseService {
     let me = this,
       beers: Beer[] = [];
 
-    return me.http.get(this.requestBaseUrl + 'beers?glasswareId=1&withBreweries=Y&p=1&key=af92fb7b6a111f9e932034edbe4faa07').
+    return me.http.get(this.requestBaseUrl + 'beers?glasswareId=1&withBreweries=Y&p=1&key=ee8a1a84bc76fd7d7ae6dd0dc45583e3').
       map((response: Response) => {
         let data = response.json();
         beers = me.deserializeBeers(data);
@@ -76,14 +76,7 @@ export class BeerService extends BaseService {
       beer.alcoholPrecentage = responseData.abv || undefined;
       beer.description = responseData.description || undefined;
       beer.imageUrl = (responseData.labels && responseData.labels["medium"]) ? responseData.labels["medium"] : undefined;
-
-      if (responseData.breweries && responseData.breweries.length > 0) {
-        responseData.breweries.forEach(element => {
-          breweries.push(element.name);
-        });
-      }
-      beer.breweries = breweries;
-
+      beer.brewery = (responseData.breweries && responseData.breweries.length > 0) ?responseData.breweries[0].name:"";
     } catch (e) {
       //ignore the object
       beer = undefined;

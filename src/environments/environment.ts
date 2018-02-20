@@ -7,5 +7,5 @@ export const environment = {
   production: false,
   herokuUrl : "https://cors-anywhere.herokuapp.com/",
   breweryDbUrl : "https://api.brewerydb.com/v2/",
-  appKey :"af92fb7b6a111f9e932034edbe4faa07"
+  appKey :"ee8a1a84bc76fd7d7ae6dd0dc45583e3"
 };

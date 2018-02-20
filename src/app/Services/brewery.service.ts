@@ -23,10 +23,9 @@ export class BreweryService extends BaseService {
       breweries: Brewery[] = [];
 
     return me.http.get(this.requestBaseUrl + 'breweries?since=1501545600&status=verified&hasImages=Y&' +
-      'p=1&key=af92fb7b6a111f9e932034edbe4faa07').
+      'p=1&key=ee8a1a84bc76fd7d7ae6dd0dc45583e3').
       map((response: Response) => {
         let data = response.json();
-        debugger;
         breweries = me.deserializeBreweries(data);
         console.log(breweries);
         return breweries;

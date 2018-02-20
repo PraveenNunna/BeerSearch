@@ -29,14 +29,18 @@
             </div>
 
             <div class="columns small-9 large-9 medium-9 col-md-6">
-                <div class="columns small-12 large-10 col-md-12">
-                  <b style="font-weight: bold;">{{row.name}}</b>
-                </div>
-                <div class="columns small-12 large-10 col-md-12">
-                  {{row.description}}
-                </div>
-
+              <div class="columns small-12 large-10 col-md-12">
+                <b style="font-weight: bold;">{{row.name}}</b>
+              </div> <br>
+              <div class="columns small-12 large-10 col-md-12">
+                <b style="font-weight: bold;"> Brewery:</b>
+                  {{row.brewery}}
+              </div> <br>
+              <div class="columns small-12 large-10 col-md-12" style="white-space: normal !important;">
+                <b style="font-weight: bold;">Description:</b> <br> <br> {{row.description}}
               </div>
+
+            </div>
           </div>
 
         </ng-template>
