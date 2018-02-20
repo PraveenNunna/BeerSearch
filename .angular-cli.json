@@ -19,9 +19,19 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
+        "../node_modules/bootstrap/dist/css/bootstrap.min.css",
+        "../node_modules/@swimlane/ngx-datatable/src/themes/bootstrap.scss",
+        "../node_modules/@swimlane/ngx-datatable/src/themes/dark.scss",
+        "../node_modules/@swimlane/ngx-datatable/src/themes/material.scss",
+        "../node_modules/@swimlane/ngx-datatable/assets/app.css",
+        "../node_modules/@swimlane/ngx-datatable/assets/icons.css",
         "styles.css"
       ],
-      "scripts": [],
+      "scripts": [
+        "../node_modules/jquery/dist/jquery.min.js",
+        "../node_modules/tether/dist/js/tether.min.js",
+        "../node_modules/bootstrap/dist/js/bootstrap.min.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",
