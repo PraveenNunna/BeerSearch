@@ -10,11 +10,13 @@ import { Brewery } from '../../Classes/Brewery';
 
 export class BreweryComponent implements OnInit {
   rows = [];
+  public loading = true;
   constructor(private breweryService: BreweryService) {
+    this.getBreweries();
   }
 
   ngOnInit() {
-    this.getBreweries();
+
   }
 
   getBreweries(): void {
@@ -22,7 +24,10 @@ export class BreweryComponent implements OnInit {
 
     me.breweryService.getLatestBrewries()
       .subscribe(
-      result => me.rows = result,
+      result => {
+        me.rows = result;
+        this.loading = false;
+       },
       error => console.log("Error :: " + error)
       );
   }

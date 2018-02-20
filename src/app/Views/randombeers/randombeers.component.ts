@@ -11,10 +11,15 @@ import { Beer } from '../../Classes/Beer';
 export class RandombeersComponent implements OnInit {
   public loading = true;
   rows = [];
-  constructor(private beerService: BeerService) { this.rows = []; }
+
+  constructor(private beerService: BeerService) {
+    this.rows = [];
+
+    this.getBeers();
+   }
 
   ngOnInit() {
-    this.getBeers();
+
   }
   getBeers(): void {
     var me = this;
