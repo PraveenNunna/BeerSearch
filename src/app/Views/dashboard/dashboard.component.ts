@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation, ViewChild, OnInit } from '@angular/core';
-import {BeerService} from '../../Services/beer.service';
-import {Beer} from '../../Classes/Beer';
+import { BeerService } from '../../Services/beer.service';
+import { Beer } from '../../Classes/Beer';
 import { DatatableRowDetailDirective } from '@swimlane/ngx-datatable';
 
 @Component({
@@ -11,7 +11,7 @@ import { DatatableRowDetailDirective } from '@swimlane/ngx-datatable';
 export class DashboardComponent implements OnInit {
   @ViewChild('myTable') table: any;
 
-  public beers : Beer[];
+  public beers: Beer[];
 
   rows = [];
   temp = [];
@@ -21,10 +21,10 @@ export class DashboardComponent implements OnInit {
   reorderable: boolean = true;
 
   columns = [
-    { name: 'Beer Name', prop:'name' },
-    { name: 'Style', prop : 'styleName' },
+    { name: 'Beer Name', prop: 'name' },
+    { name: 'Style', prop: 'styleName' },
     { name: 'Alcohol %', prop: 'alcoholPrecentage' },
-    {name : 'Description', prop: 'description'}//,
+    { name: 'Description', prop: 'description' }//,
     //{name : 'Image' , prop : ''}
   ];
   //page={} ;
@@ -48,7 +48,7 @@ export class DashboardComponent implements OnInit {
 
     const val = event.target.value.toLowerCase();
     // filter our data
-    const temp = this.temp.filter(function(d) {
+    const temp = this.temp.filter(function (d) {
       return d.name.toLowerCase().indexOf(val) !== -1 || !val;
     });
 
@@ -56,21 +56,21 @@ export class DashboardComponent implements OnInit {
     this.rows = temp;
 
   }
-  setPage(pageInfo){
+  setPage(pageInfo) {
     console.log(pageInfo.offset);
   }
 
-  getBeers():void {
+  getBeers(): void {
     var me = this;
 
     me.beerService.getDefaultBeers()
-    .subscribe(
+      .subscribe(
       result => {
         me.loadingIndicator = false;
         me.rows = result
       },
       error => console.log("Error :: " + error)
-    );
+      );
 
   }
 
@@ -82,18 +82,24 @@ export class DashboardComponent implements OnInit {
 
   }
 
-  searchByName(searchString:string){
+  searchByName(searchString: string) {
     var me = this;
 
-    me.loadingIndicator = true;
-    me.beerService.getBeers(searchString)
-    .subscribe(
-      result => {
-        me.rows = result;
-        me.loadingIndicator = false;
-      },
-      error => console.log("Error :: " + error)
-    );
+    searchString = searchString.trim();
+    if (searchString === "") {
+        console.info("search string is empty");
+    }
+    else {
+      me.loadingIndicator = true;
+      me.beerService.getBeers(searchString)
+        .subscribe(
+        result => {
+          me.rows = result;
+          me.loadingIndicator = false;
+        },
+        error => console.log("Error :: " + error)
+        );
+    }
   }
 
 }

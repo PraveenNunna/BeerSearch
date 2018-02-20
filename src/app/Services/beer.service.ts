@@ -24,7 +24,7 @@ export class BeerService extends BaseService {
     let me = this,
       beers: Beer[] = [];
 
-    return me.http.get(`${this.requestBaseUrl}beers?hasLabels=Y&withBreweries=Y&key=${me.apiKey}`).
+    return me.http.get(`${this.requestBaseUrl}beers?order=name&sort=ASC&hasLabels=Y&withBreweries=Y&key=${me.apiKey}`).
       map((response: Response) => {
         let data = response.json();
         beers = me.deserializeBeers(data);
@@ -50,9 +50,10 @@ export class BeerService extends BaseService {
 
   public getRandomBeers(): Observable<Beer[]> {
     let me = this,
-      beers: Beer[] = [];
+      beers: Beer[] = [],
+      randomGlassWareId = Math.floor(Math.random() * 6) + 1;
 
-    return me.http.get(`${this.requestBaseUrl}beers?glasswareId=1&withBreweries=Y&p=1&key=${me.apiKey}`).
+    return me.http.get(`${this.requestBaseUrl}beers?glasswareId=${randomGlassWareId}&withBreweries=Y&p=1&key=${me.apiKey}`).
       map((response: Response) => {
         let data = response.json();
         beers = me.deserializeBeers(data);
