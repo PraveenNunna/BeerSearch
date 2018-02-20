@@ -4,8 +4,10 @@ import { HttpModule } from '@angular/http';
 import {Http, Response, Headers, RequestOptions} from '@angular/http';
 
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { LoadingModule } from 'ngx-loading';
 
 import {BeerService} from './Services/beer.service';
+import {BreweryService} from './Services/brewery.service';
 
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
@@ -31,7 +33,8 @@ import { AboutbeerComponent } from './Views/aboutbeer/aboutbeer.component';
     NgxDatatableModule
   ],
   providers: [
-    BeerService
+    BeerService,
+    BreweryService
   ],
   bootstrap: [AppComponent]
 })

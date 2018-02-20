@@ -11,7 +11,7 @@ export class BeerService extends BaseService {
   private beers: Array<Beer> = [];
 
   private requestBaseUrl: string = this.getFullUrl();
-  private apiKey : string = this.getAppKey();
+  private apiKey: string = this.getAppKey();
   private http: Http;
 
   constructor(_http: Http) {
@@ -34,8 +34,39 @@ export class BeerService extends BaseService {
       .catch(this.handleError);
   }
 
+  //This method will return beers based on search string.
+  public getBeers(searchString: string): Observable<Beer[]> {
+    let me = this,
+      beers: Beer[] = [];
+
+    return me.http.get(this.requestBaseUrl + 'search?q=' + searchString + '&key=af92fb7b6a111f9e932034edbe4faa07').
+      map((response: Response) => {
+
+        let data = response.json();
+        beers = me.deserializeBeers(data);
+        console.log("Success");
+        return beers;
+      }) //For Success Response
+      .catch(this.handleError);
+  }
+
+  public getRandomBeers(): Observable<Beer[]> {
+    let me = this,
+      beers: Beer[] = [];
+
+    return me.http.get(this.requestBaseUrl + 'beers?glasswareId=1&withBreweries=Y&p=1&key=af92fb7b6a111f9e932034edbe4faa07').
+      map((response: Response) => {
+        let data = response.json();
+        beers = me.deserializeBeers(data);
+        console.log(beers);
+        return beers;
+      }) //For Success Response
+      .catch(this.handleError);
+  }
+
   private deserializeBeer(responseData: any): Beer {
-    let beer: Beer, breweries:string[] =[];
+    let beer: Beer,
+      breweries: string[] = [];
     try {
       beer = new Beer();
 
@@ -44,9 +75,9 @@ export class BeerService extends BaseService {
       beer.styleName = responseData.style ? responseData.style.name : undefined;
       beer.alcoholPrecentage = responseData.abv || undefined;
       beer.description = responseData.description || undefined;
-      beer.imageUrl = (responseData.labels && responseData.labels["medium"] )? responseData.labels["medium"] : "";
+      beer.imageUrl = (responseData.labels && responseData.labels["medium"]) ? responseData.labels["medium"] : undefined;
 
-      if(responseData.breweries && responseData.breweries.length>0){
+      if (responseData.breweries && responseData.breweries.length > 0) {
         responseData.breweries.forEach(element => {
           breweries.push(element.name);
         });
