@@ -14,8 +14,11 @@ export class DashboardComponent implements OnInit {
   public beers : Beer[];
 
   rows = [];
-
   temp = [];
+  pageNumber;
+  size;
+  loadingIndicator: boolean;
+  reorderable: boolean = true;
 
   columns = [
     { name: 'Beer Name', prop:'name' },
@@ -25,14 +28,12 @@ export class DashboardComponent implements OnInit {
     //{name : 'Image' , prop : ''}
   ];
   //page={} ;
-  pageNumber;
-  size;
-  loadingIndicator: boolean = true;
-  reorderable: boolean = true;
+
   constructor(private beerService: BeerService) {
     this.pageNumber = 1;
     this.size = 5;
     this.rows = [];
+    this.loadingIndicator = true;
 
     this.getBeers();
   }
@@ -46,7 +47,6 @@ export class DashboardComponent implements OnInit {
   updateFilter(event) {
 
     const val = event.target.value.toLowerCase();
-    console.log(val);
     // filter our data
     const temp = this.temp.filter(function(d) {
       return d.name.toLowerCase().indexOf(val) !== -1 || !val;
@@ -75,18 +75,23 @@ export class DashboardComponent implements OnInit {
   }
 
   toggleExpandRow(row) {
-    console.log('Toggled Expand Row!', row);
     this.table.rowDetail.toggleExpandRow(row);
   }
 
   onDetailToggle(event) {
-    console.log('Detail Toggled', event);
+
   }
 
   searchByName(searchString:string){
-    this.beerService.getBeers(searchString)
+    var me = this;
+
+    me.loadingIndicator = true;
+    me.beerService.getBeers(searchString)
     .subscribe(
-      result => this.rows = result,
+      result => {
+        me.rows = result;
+        me.loadingIndicator = false;
+      },
       error => console.log("Error :: " + error)
     );
   }

@@ -12,6 +12,7 @@ export class BreweryService extends BaseService {
   private requestBaseUrl: string = this.getFullUrl();
   private http: Http;
   private breweries: Array<Brewery> = [];
+  private apiKey: string = this.getAppKey();
 
   constructor(_http: Http) {
     super();
@@ -22,12 +23,11 @@ export class BreweryService extends BaseService {
     let me = this,
       breweries: Brewery[] = [];
 
-    return me.http.get(this.requestBaseUrl + 'breweries?since=1501545600&status=verified&hasImages=Y&' +
-      'p=1&key=ee8a1a84bc76fd7d7ae6dd0dc45583e3').
+    return me.http.get(`${this.requestBaseUrl}breweries?since=1501545600&status=verified&hasImages=Y&' +
+      'p=1&key=${me.apiKey}`).
       map((response: Response) => {
         let data = response.json();
         breweries = me.deserializeBreweries(data);
-        console.log(breweries);
         return breweries;
       }) //For Success Response
       .catch(this.handleError);

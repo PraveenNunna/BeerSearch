@@ -13,7 +13,7 @@
       </div>
     </div>
 
-    <ngx-datatable #myTable class="bootstrap" [rows]="rows" [loadingIndicator]="loadingIndicator" [columns]="columns" [columnMode]="'force'"
+    <ngx-datatable #myTable class="material bootstrap" [rows]="rows" [loadingIndicator]="loadingIndicator" [columns]="columns" [columnMode]="'force'"
       [headerHeight]="50" [footerHeight]="50" [limit]="10" [rowHeight]="100" [reorderable]="reorderable">
 
       <ngx-datatable-row-detail [rowHeight]="'auto'" #myDetailRow (toggle)="onDetailToggle($event)">

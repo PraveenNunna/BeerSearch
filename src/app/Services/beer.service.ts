@@ -28,7 +28,6 @@ export class BeerService extends BaseService {
       map((response: Response) => {
         let data = response.json();
         beers = me.deserializeBeers(data);
-        console.log("Success");
         return beers;
       }) //For Success Response
       .catch(this.handleError);
@@ -39,12 +38,11 @@ export class BeerService extends BaseService {
     let me = this,
       beers: Beer[] = [];
 
-    return me.http.get(this.requestBaseUrl + 'search?q=' + searchString + '&key=ee8a1a84bc76fd7d7ae6dd0dc45583e3').
+    return me.http.get(`${this.requestBaseUrl}search?q=${searchString}&hasLabels=Y&withBreweries=Y&key=${me.apiKey}`).
       map((response: Response) => {
 
         let data = response.json();
         beers = me.deserializeBeers(data);
-        console.log("Success");
         return beers;
       }) //For Success Response
       .catch(this.handleError);
@@ -54,11 +52,10 @@ export class BeerService extends BaseService {
     let me = this,
       beers: Beer[] = [];
 
-    return me.http.get(this.requestBaseUrl + 'beers?glasswareId=1&withBreweries=Y&p=1&key=ee8a1a84bc76fd7d7ae6dd0dc45583e3').
+    return me.http.get(`${this.requestBaseUrl}beers?glasswareId=1&withBreweries=Y&p=1&key=${me.apiKey}`).
       map((response: Response) => {
         let data = response.json();
         beers = me.deserializeBeers(data);
-        console.log(beers);
         return beers;
       }) //For Success Response
       .catch(this.handleError);
