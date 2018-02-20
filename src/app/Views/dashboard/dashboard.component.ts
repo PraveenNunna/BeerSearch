@@ -35,32 +35,12 @@ export class DashboardComponent implements OnInit {
     this.rows = [];
 
     this.getBeers();
-    // this.fetch((data) => {
-    //   data = [
-    //     { name: 'Austin', gender: 'Male', company: 'Swimlane' },
-    //     { name: 'Dany', gender: 'Male', company: 'KFC' },
-    //     { name: 'Molly', gender: 'Female', company: 'Burger King' },
-    //   ];
-    //   // cache our list
-    //   this.temp = data;
-
-    //   // push our inital complete list
-    //   this.rows = data;
-    // });
   }
   ngOnInit() {
 
   }
 
   fetch(cb) {
-    // const req = new XMLHttpRequest();
-    // req.open('GET', `assets/data/company.json`);
-
-    // req.onload = () => {
-    //   cb(JSON.parse(req.response));
-    // };
-
-    // req.send();
   }
 
   updateFilter(event) {
@@ -78,11 +58,6 @@ export class DashboardComponent implements OnInit {
   }
   setPage(pageInfo){
     console.log(pageInfo.offset);
-    // this.page.pageNumber = pageInfo.offset;
-    // this.serverResultsService.getResults(this.page).subscribe(pagedData => {
-    //   this.page = pagedData.page;
-    //   this.rows = pagedData.data;
-    // });
   }
 
   getBeers():void {
@@ -109,7 +84,11 @@ export class DashboardComponent implements OnInit {
   }
 
   searchByName(searchString:string){
-
+    this.beerService.getBeers(searchString)
+    .subscribe(
+      result => this.rows = result,
+      error => console.log("Error :: " + error)
+    );
   }
 
 }

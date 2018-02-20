@@ -1,13 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
-import {Http, Response, Headers, RequestOptions} from '@angular/http';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
 
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { LoadingModule } from 'ngx-loading';
+import { ModalModule } from "ng2-modal";
 
-import {BeerService} from './Services/beer.service';
-import {BreweryService} from './Services/brewery.service';
+import { BeerService } from './Services/beer.service';
+import { BreweryService } from './Services/brewery.service';
 
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
@@ -30,7 +31,9 @@ import { AboutbeerComponent } from './Views/aboutbeer/aboutbeer.component';
     BrowserModule,
     routing,
     HttpModule,
-    NgxDatatableModule
+    NgxDatatableModule,
+    LoadingModule,
+    ModalModule
   ],
   providers: [
     BeerService,

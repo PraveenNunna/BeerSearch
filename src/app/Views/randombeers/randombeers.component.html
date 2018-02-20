@@ -1,3 +1,30 @@
-<p>
-  randombeers works!
-</p>
+<div class="row">
+  <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+  <div class="columns small-6 medium-6 large-4 beers col-md-3 col-md-offset-3" *ngFor="let row of rows">
+    <div class="beer-container">
+      <div class="row">
+
+        <div class="columns small-12 large-10">
+          <b>{{row.name}}</b>
+        </div>
+
+      </div>
+      <p class="ng-tns-c2-7 ng-star-inserted">{{row.description}}</p>
+
+      <a (click)="detailsModal.open(row)">More Info</a>
+
+      <modal #detailsModal>
+        <modal-header>
+          <h1>{{row.name}}</h1>
+        </modal-header>
+        <modal-content>
+          {{row.description}}
+        </modal-content>
+        <modal-footer>
+          <button class="btn btn-primary" (click)="detailsModal.close()">okay!</button>
+        </modal-footer>
+      </modal>
+
+    </div>
+  </div>
+</div>
