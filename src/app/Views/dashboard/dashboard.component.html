@@ -1,91 +1,77 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
-    <h1>
-      Welcome to {{ title }}!
-    </h1>
+  <h1>
+    Beer Search
+  </h1>
 
-    <div>
-      <table>
-        <tr>
-          <td>
-            <input class="form-control" #searchName placeholder="Search Here" />
+  <div>
 
-          </td>
-          <td><input type="button" value="Search" (click)="searchByName(searchName.value)" /></td>
-        </tr>
-      </table>
-      <!-- <ngx-datatable
-        #table
-        class="dark"
-        [columns]="columns"
-        [columnMode]="'force'"
-        [headerHeight]="50"
-        [footerHeight]="50"
-        [rowHeight]="'auto'"
-        [limit]="10"
+    <table>
+      <tr>
+        <td>
+          <input class="form-control" #searchName placeholder="Search Here" />
 
-        [rows]='rows'>
-      </ngx-datatable> -->
+        </td>
+        <td><input type="button" value="Search" (click)="searchByName(searchName.value)" /></td>
+      </tr>
+    </table>
 
-      <ngx-datatable
-          #myTable
-          class="bootstrap"
-          [rows]="rows"
-          [loadingIndicator]="loadingIndicator"
-          [columns]="columns"
-          [columnMode]="'force'"
-          [headerHeight]="50"
-          [footerHeight]="50"
-          [limit]="10"
-          [rowHeight]="100"
-          [reorderable]="reorderable">
+    <ngx-datatable #myTable class="bootstrap" [rows]="rows" [loadingIndicator]="loadingIndicator" [columns]="columns" [columnMode]="'force'"
+      [headerHeight]="50" [footerHeight]="50" [limit]="10" [rowHeight]="100" [reorderable]="reorderable">
 
-          <ngx-datatable-row-detail [rowHeight]="'auto'"  #myDetailRow (toggle)="onDetailToggle($event)">
-            <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
-              <div><strong>Description</strong></div>
-              <div>{{row.description}}</div>
-            </ng-template>
-          </ngx-datatable-row-detail>
+      <ngx-datatable-row-detail [rowHeight]="'auto'" #myDetailRow (toggle)="onDetailToggle($event)">
+        <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
 
-        <ngx-datatable-column
-          [width]="50"
-          [resizeable]="false"
-          [sortable]="false"
-          [draggable]="false"
-          [canAutoResize]="false">
-          <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
-            <a
-              href="javascript:void(0)"
-              [class.datatable-icon-right]="!expanded"
-              [class.datatable-icon-down]="expanded"
-              title="Expand/Collapse Row"
-              (click)="toggleExpandRow(row)">
+          <div class="row">
+
+            <div class="columns small-3 large-3 medium-3 col-md-3">
+              <img [src]="row.imageUrl" />
+            </div>
+
+            <div class="columns small-9 large-9 medium-9 col-md-6">
+                <div class="columns small-12 large-10 col-md-12">
+                  <b style="font-weight: bold;">{{row.name}}</b>
+                </div>
+                <div class="columns small-12 large-10 col-md-12">
+                  {{row.description}}
+                </div>
+
+              </div>
+          </div>
+
+        </ng-template>
+      </ngx-datatable-row-detail>
+
+      <ngx-datatable-column [width]="50" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="false">
+        <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+          <a href="javascript:void(0)" [class.datatable-icon-right]="!expanded" [class.datatable-icon-down]="expanded" title="Expand/Collapse Row"
+            (click)="toggleExpandRow(row)">
             </a>
-          </ng-template>
-        </ngx-datatable-column>
+        </ng-template>
+      </ngx-datatable-column>
 
-        <ngx-datatable-column name="Beer Name" prop= 'name' width="200">
-          <ng-template let-value="value" ngx-datatable-cell-template>
-            <strong>{{value}}</strong>
-          </ng-template>
-        </ngx-datatable-column>
+      <ngx-datatable-column name="Beer Name" prop='name' width="200">
+        <ng-template let-value="value" ngx-datatable-cell-template>
+          <strong>{{value}}</strong>
+        </ng-template>
+      </ngx-datatable-column>
 
-        <ngx-datatable-column name="Style" prop= 'styleName' width="200">
-            <ng-template let-value="value" ngx-datatable-cell-template>
-              <strong>{{value}}</strong>
-            </ng-template>
-          </ngx-datatable-column>
+      <ngx-datatable-column name="Style" prop='styleName' width="200">
+        <ng-template let-value="value" ngx-datatable-cell-template>
+          <strong>{{value}}</strong>
+        </ng-template>
+      </ngx-datatable-column>
 
-        <ngx-datatable-column name="Alcohol %" prop= 'alcoholPrecentage' width="50">
-          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-            <span>{{value}}</span>
-          </ng-template>
-        </ngx-datatable-column>
+      <ngx-datatable-column name="Alcohol %" prop='alcoholPrecentage' width="50">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          <span>{{value}}</span>
+        </ng-template>
+      </ngx-datatable-column>
 
-      </ngx-datatable>
+    </ngx-datatable>
 
-    </div>
-    <br/>
   </div>
+  <br/>
+</div>
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/css/foundation-flex.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/css/foundation-flex.min.css">

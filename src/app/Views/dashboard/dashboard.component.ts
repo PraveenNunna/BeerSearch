@@ -12,7 +12,6 @@ export class DashboardComponent implements OnInit {
   @ViewChild('myTable') table: any;
 
   public beers : Beer[];
-  title = 'app';
 
   rows = [];
 

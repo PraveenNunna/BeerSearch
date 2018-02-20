@@ -10,7 +10,12 @@ export class Beer {
 
   public styleName: string;
 
+  public imageUrl : string;
+
+  public breweries : string[];
+
   constructor() {
+
   }
 
 }

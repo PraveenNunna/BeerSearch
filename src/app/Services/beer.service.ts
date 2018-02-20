@@ -23,7 +23,8 @@ export class BeerService extends BaseService {
   public getDefaultBeers(): Observable<Beer[]> {
     let me = this,
       beers: Beer[] = [];
-    return me.http.get(`${this.requestBaseUrl}beers?key=${me.apiKey}`).
+
+    return me.http.get(`${this.requestBaseUrl}beers?hasLabels=Y&withBreweries=Y&key=${me.apiKey}`).
       map((response: Response) => {
         let data = response.json();
         beers = me.deserializeBeers(data);
@@ -34,7 +35,7 @@ export class BeerService extends BaseService {
   }
 
   private deserializeBeer(responseData: any): Beer {
-    let beer: Beer;
+    let beer: Beer, breweries:string[] =[];
     try {
       beer = new Beer();
 
@@ -43,6 +44,14 @@ export class BeerService extends BaseService {
       beer.styleName = responseData.style ? responseData.style.name : undefined;
       beer.alcoholPrecentage = responseData.abv || undefined;
       beer.description = responseData.description || undefined;
+      beer.imageUrl = (responseData.labels && responseData.labels["medium"] )? responseData.labels["medium"] : "";
+
+      if(responseData.breweries && responseData.breweries.length>0){
+        responseData.breweries.forEach(element => {
+          breweries.push(element.name);
+        });
+      }
+      beer.breweries = breweries;
 
     } catch (e) {
       //ignore the object
