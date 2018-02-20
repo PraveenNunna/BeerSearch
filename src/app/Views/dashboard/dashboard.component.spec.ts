@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DashboardComponent } from './dashboard.component';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { BeerService } from '../../Services/beer.service';
+import { HttpModule } from '@angular/http';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -8,7 +11,9 @@ describe('DashboardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DashboardComponent ]
+      declarations: [ DashboardComponent ],
+      imports:[NgxDatatableModule,HttpModule],
+      providers:[BeerService]
     })
     .compileComponents();
   }));
